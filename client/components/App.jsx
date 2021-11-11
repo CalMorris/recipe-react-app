@@ -17,7 +17,7 @@ const App = () => {
   return (
     <>
     {count}
-    <h1>{greeting}</h1>
+    <h1 className='text-yellow-50'>{greeting}</h1>
     <button onClick={() => setCount(count + 1)}>Click</button>
     </>
   )
