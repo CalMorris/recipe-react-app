@@ -1,6 +1,8 @@
 import request from 'superagent'
 
-export function getGreeting() {
-  return request.get('/greeting')
-                .then(res => res.body.greeting)
+const recipesUrl = 'http://localhost:3000/api/v1/recipes'
+
+export function getRecipes () {
+  return request.get(recipesUrl)
+    .then(res => console.log(res.body.hits))
 }
