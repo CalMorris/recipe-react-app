@@ -15568,8 +15568,7 @@ video {
 }
 
 .bg-green-700 {
-  --tw-bg-opacity: 1;
-  background-color: rgba(4, 120, 87, var(--tw-bg-opacity));
+  background-color: rgba(12, 95,95);
 }
 
 .bg-green-800 {
@@ -22811,7 +22810,7 @@ video {
 
 .text-green-200 {
   --tw-text-opacity: 1;
-  color: rgba(167, 243, 208, var(--tw-text-opacity));
+  color: rgba(114,174,178, var(--tw-text-opacity));
 }
 
 .text-green-300 {

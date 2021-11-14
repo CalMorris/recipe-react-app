@@ -11,6 +11,7 @@ const App = () => {
   useEffect(() => {
     getRecipes(keywords)
       .then((recipeList) => {
+        console.log(recipeList)
         setRecipes(recipeList)
         return null
       })
@@ -24,25 +25,24 @@ const App = () => {
   }
 
   const recipeList = recipes.map(({ recipe }, i) => {
-    console.log(recipe)
     return <RecipeCard
       key={i}
       dietLabels={recipe.dietLabels}
       image={recipe.image}
       label={recipe.label}
-      mealType={recipe.mealType}/>
+      totalTime={recipe.totalTime}
+      dishType={recipe.dishType}/>
   })
   // console.log(recipes)
   return (<>
-    <RecipeSearch handleSubmit={handleSubmit}/>
-    {recipeList}
+    <div>
+      <RecipeSearch handleSubmit={handleSubmit}/>
+    </div>
+    <div className='grid grid-cols-4 gap-10 mt-20'>
+      {recipeList}
+    </div>
   </>
   )
 }
 
 export default App
-
-// dietLabels []
-// image
-// mealType []
-// label
