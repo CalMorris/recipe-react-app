@@ -9,5 +9,7 @@ module.exports = {
   variants: {
     extend: {}
   },
-  plugins: []
+  corePlugins: {
+    wordBreak: false
+  }
 }

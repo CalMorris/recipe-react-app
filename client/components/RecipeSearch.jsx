@@ -6,7 +6,7 @@ export default function RecipeSearch (props) {
 
   function handleChange (event) {
     const { value } = event.target
-    setInputValue(value)``
+    setInputValue(value)
   }
 
   return (<>
