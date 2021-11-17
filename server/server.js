@@ -23,8 +23,7 @@ server.get(recipesUrl, (req, res) => {
       app_id: process.env.APP_ID,
       q: keywords
     })
-    .then(result => res.json(readRecipes(result.body.hits))
-    )
+    .then(result => res.json(readRecipes(result.body.hits)))
     .catch(err => console.log(err))
 })
 
