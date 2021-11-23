@@ -3,13 +3,18 @@ import { getRecipes } from '../apiClient'
 
 import RecipeSearch from './RecipeSearch'
 import RecipeCard from './RecipeCard'
-import Nav from './Nav'
-// import gif from '/loading.gif'
+// import Nav from './Nav'
+
+// import { useAuth0 } from '@auth0/auth0-react'
 
 const Home = () => {
   const [keywords, setKeywords] = useState('')
   const [recipes, setRecipes] = useState([])
   const [loading, setLoading] = useState(false)
+
+  // const { user, isAuthenticated, isLoading } = useAuth0()
+
+  // console.log(user)
 
   useEffect(() => {
     getRecipes(keywords)
@@ -28,26 +33,25 @@ const Home = () => {
     event.target.reset()
   }
 
-  const recipeList = recipes.map(({ dietLabels, image, label, totalTime, recipeId, dishType }) => {
+  const recipeList = recipes.map(({ image, id, title, likes }) => {
     return <RecipeCard
-      key={recipeId}
-      dietLabels={dietLabels}
+      key={id}
+      id={id}
       image={image}
-      label={label}
-      totalTime={totalTime}
-      recipeId={recipeId}
-      dishType={dishType}/>
+      title={title}
+      likes={likes}
+    />
   })
 
   return (<>
-    <Nav/>
+    {/* <Nav/> */}
     <div className='h-screen bg-cover bg-no-repeat bg-center' style={{ backgroundImage: 'url(/bg.png)' }}>
       <RecipeSearch handleSubmit={handleSubmit}/>
 
       <div className='flex justify-center mt-20'>
         {loading && <img src='/loading.gif'className='w-3/6'/>}
       </div>
-      <div className='grid grid-cols-4 gap-10 mt-20 px-40'>
+      <div className='grid grid-cols-3 gap-10 mt-20 px-40'>
         {recipeList}
       </div>
     </div>

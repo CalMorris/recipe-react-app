@@ -1,21 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default function RecipeCard ({ dietLabels, image, dishType, label, recipeId }) {
-  return (<Link to={`/${recipeId}`}>
-    <div className='filter drop-shadow-lg'>
+export default function RecipeCard ({ id, image, title, likes }) {
+  return (<Link to={`/recipe/${id}`}>
+    <div className='filter hover:text-green-700 transition duration-500 ease-in-out'>
+
       <div className=''>
-        <img className='object-cover w-full rounded-t' src={image} alt={label} />
+        <img className='object-cover h-80' src={image} alt={title} />
       </div>
-      <div className='rounded-b-lg px-4 py-2 height-34 border-t-2 bg-white text-green-700'>
-        <h2 className="font-sans text-xl font-bold">{label}</h2>
-        <p>{dietLabels}</p>
-        <p className='text-gray-600'>{dishType}</p>
-      </div>
+      <h2 className=" font-sans pt-4">{title}</h2>
     </div>
   </Link>
   )
 }
-
-// <a href={`/${recipeId}`}>
-// </a>
