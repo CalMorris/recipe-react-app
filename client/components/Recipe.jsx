@@ -114,7 +114,7 @@ export function Recipe (props) {
             <div className='self-end'>
               {healthLabels}
             </div>
-            <button onClick={() => addRecipe(recipeId, recipe.title, recipe.image, token)}>Save</button>
+            <button onClick={() => addRecipe(recipeId, recipe.title, recipe.image, token)} className='font-sans flex-none text-white px-8 py-2 bg-green-700 rounded'>Save</button>
           </div>
         </div>
         <div className='mt-20'>

@@ -12,10 +12,6 @@ const Home = () => {
   const [recipes, setRecipes] = useState([])
   const [loading, setLoading] = useState(false)
 
-  // const { user, isAuthenticated, isLoading } = useAuth0()
-
-  // console.log(user)
-
   useEffect(() => {
     getRecipes(keywords)
       .then((recipeList) => {
