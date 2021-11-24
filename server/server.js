@@ -6,40 +6,50 @@ require('dotenv').config()
 const db = require('./db/users')
 const checkJwt = require('./auth0')
 
+const spoonacular = require('./Routes/spoonacular')
+
 const server = express()
-const recipesUrl = '/api/v1/recipes'
-const recipeUrl = '/api/v1/recipe'
+// const recipesUrl = '/api/v1/recipes'
+// const recipeUrl = '/api/v1/recipe'
 const users = '/api/v1/users'
-const recipeAdd = '/api/v1/recipeadd'
-const userRecipes = '/api/v1/userrecipes'
+// const recipeAdd = '/api/v1/recipeadd'
+// const userRecipes = '/api/v1/db/getuserrecipes'
+const recipeAdd = '/api/v1/db/addrecipe'
+const userRecipes = '/api/v1/db/getrecipes'
+
+// think of good naming conventions
+// const spoonacular = '/api/v1/spoonacular'
+// const recipes  = '/api/v1/recipes'
+// const users = '/api/v1/users'
 
 server.use(express.json())
 server.use(express.static(path.join(__dirname, './public')))
 server.use(cors('*'))
+server.use('/api/v1/spoonacular', spoonacular)
 
-server.get(recipesUrl, (req, res) => {
-  const keywords = req.headers.keywords
-  request.get('https://api.spoonacular.com/recipes/findByIngredients')
-    .query({
-      ContentType: 'application/json',
-      apiKey: '1d49f111f2564f1ca8b4f3582bf55d79',
-      ingredients: keywords, // the ingredients are seperated by comma - no spaces or whitespace
-      number: '20'
-    })
-    .then(result => res.json(result.body))
-    .catch(err => console.log(err.message))
-})
+// server.get(recipesUrl, (req, res) => {
+//   const keywords = req.headers.keywords
+//   request.get('https://api.spoonacular.com/recipes/findByIngredients')
+//     .query({
+//       ContentType: 'application/json',
+//       apiKey: '1d49f111f2564f1ca8b4f3582bf55d79',
+//       ingredients: keywords, // the ingredients are seperated by comma - no spaces or whitespace
+//       number: '20'
+//     })
+//     .then(result => res.json(result.body))
+//     .catch(err => console.log(err.message))
+// })
 
-server.get(recipeUrl, (req, res) => {
-  const id = req.headers.id
-  request.get(`https://api.spoonacular.com/recipes/${id}/information`)
-    .query({
-      ContentType: 'application/json',
-      apiKey: '1d49f111f2564f1ca8b4f3582bf55d79'
-    })
-    .then(result => res.json(result.body))
-    .catch(err => console.log(err))
-})
+// server.get(recipeUrl, (req, res) => {
+//   const id = req.headers.id
+//   request.get(`https://api.spoonacular.com/recipes/${id}/information`)
+//     .query({
+//       ContentType: 'application/json',
+//       apiKey: '1d49f111f2564f1ca8b4f3582bf55d79'
+//     })
+//     .then(result => res.json(result.body))
+//     .catch(err => console.log(err))
+// })
 
 server.post(users, async (req, res) => {
   const newUser = req.body

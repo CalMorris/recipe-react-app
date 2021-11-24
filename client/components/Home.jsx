@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { getRecipes } from '../apiClient'
-
+import { getRecipes } from '../apiClient/spoonacular'
 import RecipeSearch from './RecipeSearch'
 import RecipeCard from './RecipeCard'
-// import Nav from './Nav'
-
-// import { useAuth0 } from '@auth0/auth0-react'
 
 const Home = () => {
   const [keywords, setKeywords] = useState('')
@@ -40,8 +36,7 @@ const Home = () => {
   })
 
   return (<>
-    {/* <Nav/> */}
-    <div className='h-screen bg-cover bg-no-repeat bg-center' style={{ backgroundImage: 'url(/bg.png)' }}>
+    <div className='h-screen bg-cover bg-no-repeat bg-center' style={{ backgroundImage: 'url(/images/bg.png)' }}>
       <RecipeSearch handleSubmit={handleSubmit}/>
 
       <div className='flex justify-center mt-20'>

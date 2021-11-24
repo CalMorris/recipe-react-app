@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
       clientId={'8AZOWvmpkrrEHNjpM3g0qkQsNOos74R8'}
       redirectUri={window.location.origin}
       audience='https://recipes.api'
-      // audience='https://recipes/api'
     >
       <Provider store={store}>
         <Router>

@@ -1,14 +1,10 @@
 import React from 'react'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
-
-// import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-// import { useAuth0 } from '@auth0/auth0-react'
 import { useAuth0 } from '@auth0/auth0-react'
 
 export default function Nav () {
   const { logout, loginWithRedirect } = useAuth0()
-  // TODO: call the useAuth0 hook and destructure logout and loginWithRedirect
+
   function handleLogoff (e) {
     e.preventDefault()
     logout()
@@ -27,7 +23,7 @@ export default function Nav () {
   return (
     <div className=' content-center px-10 h-12 border-b-2 border-green-700 py-2 border-opacity-50 bg-white flex justify-between'>
       <a href="/">
-        <img className='h-full' src="/food-logo.jpeg" alt="image of logo" />
+        <img className='h-full' src="/images/food-logo.jpeg" alt="image of logo" />
       </a>
       <div>
 

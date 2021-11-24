@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { fetchRecipes } from '../apiClient'
+import { fetchRecipes } from '../apiClient/db'
 import RecipeCard from './RecipeCard'
 
 export default function UserRecipes () {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { getRecipe, addRecipe } from '../apiClient'
+import { getRecipe } from '../apiClient/spoonacular'
+import { addRecipe } from '../apiClient/db'
 import { PillLabel } from './PillLabel'
 import { useSelector } from 'react-redux'
 
@@ -70,11 +71,6 @@ export function Recipe (props) {
 
   const instructionList = formatMethod(recipe.instructions)
   const instructions = instructionList.map((instruction, index) => <li key={index}>{instruction}.</li>)
-
-  // function saveRecipe (recipeId, token) {
-  //   addRecipe(recipeId, token)
-  // }
-
   return (<>
     <div className='flex justify-center mt-20'>
       {loading && <img src='/loading.gif'className='w-3/6'/>}
@@ -83,7 +79,6 @@ export function Recipe (props) {
     { !loading &&
       <div className=' pb-20 mt-20 px-28'>
         <div className='bg-white grid grid-cols-2 gap-2'>
-          {/* <div className=' grid grid-cols-2 gap-2'> */}
 
           <div className=' h-full'>
             <img src={recipe.image} alt={recipe.title} className="object-cover w-full"/>

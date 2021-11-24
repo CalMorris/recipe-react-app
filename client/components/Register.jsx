@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
-import { addUser } from '../apiClient'
+import { addUser } from '../apiClient/users'
 
 import { GridForm, ColOne, ColTwo, Button } from './Styled'
 
