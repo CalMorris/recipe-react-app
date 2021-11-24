@@ -40,7 +40,7 @@ const Home = () => {
       <RecipeSearch handleSubmit={handleSubmit}/>
 
       <div className='flex justify-center mt-20'>
-        {loading && <img src='/loading.gif'className='w-3/6'/>}
+        {loading && <img src='/images/loading.gif'className='w-3/6'/>}
       </div>
       <div className='grid grid-cols-3 gap-10 mt-20 px-40'>
         {recipeList}

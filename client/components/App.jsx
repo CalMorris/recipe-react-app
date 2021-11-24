@@ -7,7 +7,6 @@ import Home from './Home'
 import { Recipe } from './Recipe'
 import Nav from './Nav'
 import UserRecipes from './UserRecipes'
-// import { Register } from './Register'
 import Register from './Register'
 
 function App () {

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-// import Background from '../../server/public/bg.png'
 
 export default function RecipeSearch (props) {
   const [inputValue, setInputValue] = useState('')

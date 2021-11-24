@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { getRecipe } from '../apiClient/spoonacular'
-import { addRecipe } from '../apiClient/db'
+import { addRecipe, fetchRecipes } from '../apiClient/db'
 import { PillLabel } from './PillLabel'
 import { useSelector } from 'react-redux'
+import { useAuth0 } from '@auth0/auth0-react'
+import { IfAuthenticated } from './Authenticated'
 
 function convertMinsToDisplayTime (minutes) {
   const hours = Math.floor(parseInt(minutes) / 60)
@@ -36,6 +38,10 @@ export function Recipe (props) {
   const url = props.match.url
   const recipeId = url.slice(8)
   const token = useSelector(state => state.token)
+  const { isAuthenticated } = useAuth0()
+
+  const [userRecipeSaved, setUserRecipeSaved] = useState(false)
+
   const [recipe, setRecipe] = useState(
     {
       analyzedInstructions: [],
@@ -48,6 +54,7 @@ export function Recipe (props) {
       productMatches: [],
       instructions: ''
     })
+
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -73,7 +80,7 @@ export function Recipe (props) {
   const instructions = instructionList.map((instruction, index) => <li key={index}>{instruction}.</li>)
   return (<>
     <div className='flex justify-center mt-20'>
-      {loading && <img src='/loading.gif'className='w-3/6'/>}
+      {loading && <img src='/images/loading.gif'className='w-3/6'/>}
     </div>
 
     { !loading &&
@@ -109,7 +116,9 @@ export function Recipe (props) {
             <div className='self-end'>
               {healthLabels}
             </div>
+            {/* <IfAuthenticated> */}
             <button onClick={() => addRecipe(recipeId, recipe.title, recipe.image, token)} className='font-sans flex-none text-white px-8 py-2 bg-green-700 rounded'>Save</button>
+            {/* </IfAuthenticated> */}
           </div>
         </div>
         <div className='mt-20'>
