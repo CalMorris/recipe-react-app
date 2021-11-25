@@ -11,7 +11,10 @@ router.get('/id', (req, res) => {
       apiKey: process.env.API_KEY
     })
     .then(result => res.json(result.body))
-    .catch(err => console.log(err))
+    .catch(err => {
+      console.log(err)
+      res.status(500).send('database error')
+    })
 })
 
 router.get('/recipes', (req, res) => {
@@ -24,7 +27,10 @@ router.get('/recipes', (req, res) => {
       number: '20'
     })
     .then(result => res.json(result.body))
-    .catch(err => console.log(err.message))
+    .catch(err => {
+      console.log(err.message)
+      res.status(500).send('database error')
+    })
 })
 
 module.exports = router

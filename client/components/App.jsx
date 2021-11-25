@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes, HashRouter as Router } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 import { cacheUser } from '../auth0-utils'
 import { useAuth0 } from '@auth0/auth0-react'

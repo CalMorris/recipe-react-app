@@ -22,7 +22,7 @@ export default function UserRecipes () {
 
   const recipeList = recipes.map(({ image, id, title }) => {
     return <RecipeCard
-      key={id}
+      key={`${id}-${title}`}
       id={id}
       image={image}
       title={title}

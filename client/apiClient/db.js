@@ -15,7 +15,7 @@ export function addRecipe (recipeId, title, imageUrl, token) {
     .set('authorization', `Bearer ${token}`)
     .send({ recipeId, title, imageUrl })
     .then(res => {
-      return null
+      return res
     })
     .catch(err => console.log(err.message))
 }

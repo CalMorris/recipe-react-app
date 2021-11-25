@@ -27,7 +27,7 @@ const Home = () => {
 
   const recipeList = recipes.map(({ image, id, title, likes }) => {
     return <RecipeCard
-      key={id}
+      key={`${id}-${title}`}
       id={id}
       image={image}
       title={title}

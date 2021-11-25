@@ -23,9 +23,14 @@ function convertMinsToDisplayTime (minutes) {
   }
 }
 
+function roundIngredientMetric (ingredient) {
+  const ingredientFloat = parseFloat(ingredient)
+  return String(Math.floor(ingredientFloat))
+}
+
 function displayIngredients (ingrediets) {
   return ingrediets.map(ingredient => {
-    return <p className='font-sans' key={ingredient} >{ingredient.measures.metric.amount} {ingredient.measures.metric.unitShort} {ingredient.nameClean}</p>
+    return <p className='font-sans' key={ingredient} >{roundIngredientMetric(ingredient.measures.metric.amount)} {ingredient.measures.metric.unitShort} {ingredient.nameClean}</p>
   })
 }
 
@@ -47,8 +52,6 @@ export function Recipe (props) {
   const url = props.match.url
   const recipeId = url.slice(8)
   const token = useSelector(state => state.token)
-  const { isAuthenticated } = useAuth0()
-
   const [userRecipeSaved, setUserRecipeSaved] = useState(false)
 
   const [recipe, setRecipe] = useState(
@@ -82,8 +85,6 @@ export function Recipe (props) {
   }
   , [userRecipeSaved])
 
-  console.log(userRecipeSaved)
-
   const cuisines = recipe.cuisines.map(cuisine => {
     return <PillLabel key={cuisine} label={cuisine}/>
   })
@@ -92,14 +93,10 @@ export function Recipe (props) {
     return <PillLabel key={label} label={label}/>
   })
 
-  function handleRecipeSave (
-
-  ) {
-    // addRecipe(recipeId, recipe.title, recipe.image, token)
-  }
-
   const instructionList = formatMethod(recipe.instructions)
+
   const instructions = instructionList.map((instruction, index) => <li key={index}>{instruction}.</li>)
+
   return (<>
     <div className='flex justify-center mt-20'>
       {loading && <img src='/images/loading.gif'className='w-3/6'/>}
@@ -142,8 +139,7 @@ export function Recipe (props) {
               {!userRecipeSaved && <button onClick={() => {
                 setUserRecipeSaved(true)
                 addRecipe(recipeId, recipe.title, recipe.image, token)
-              }
-              } className='font-sans flex-none text-white px-8 py-2 bg-green-700 rounded'>Save</button>}
+              }} className='font-sans flex-none text-white px-8 py-2 bg-green-700 rounded'>Save</button>}
               {userRecipeSaved && <button onClick={() => {
                 setUserRecipeSaved(false)
                 deleteRecipe(recipeId, token)
