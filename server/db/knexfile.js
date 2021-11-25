@@ -31,14 +31,13 @@ module.exports = {
 
   production: {
     client: 'postgresql',
-    connection: {
-      filename: path.join(__dirname, '/dev.sqlite3')
+    connection: process.env.DATABASE_URL,
+    pool: {
+      min: 2,
+      max: 10
     },
     migrations: {
-      directory: path.join(__dirname, '/knex/migrations')
-    },
-    seeds: {
-      directory: path.join(__dirname, '/knex/seeds')
+      tableName: 'knex_migrations'
     }
   }
 
