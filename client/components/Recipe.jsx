@@ -78,23 +78,24 @@ export function Recipe (props) {
       .catch(error => console.log(error))
     fetchRecipes(token)
       .then(recipeList => {
-        return setUserRecipeSaved(recipeIsSaved(recipeId, recipeList))
+        setUserRecipeSaved(recipeIsSaved(recipeId, recipeList))
+        return null
       })
       .catch(error => console.log(error))
   }
   , [userRecipeSaved])
 
-  const cuisines = recipe.cuisines.map(cuisine => {
-    return <PillLabel key={cuisine} label={cuisine}/>
+  const cuisines = recipe.cuisines.map((cuisine, index) => {
+    return <PillLabel key={`${index}-${cuisine}`} label={cuisine}/>
   })
 
-  const healthLabels = recipe.diets.map(label => {
-    return <PillLabel key={label} label={label}/>
+  const healthLabels = recipe.diets.map((label, index) => {
+    return <PillLabel key={`${index}-${label}`} label={label}/>
   })
 
   const instructionList = formatMethod(recipe.instructions)
 
-  const instructions = instructionList.map((instruction, index) => <li key={instruction}>{instruction}.</li>)
+  const instructions = instructionList.map((instruction, index) => <li key={index.toString}>{instruction}.</li>)
 
   return (<>
     <div className='flex justify-center mt-20'>
