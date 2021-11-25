@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getRecipe } from '../apiClient/spoonacular'
-import { addRecipe, fetchRecipes } from '../apiClient/db'
+import { addRecipe, fetchRecipes, deleteRecipe } from '../apiClient/db'
 import { PillLabel } from './PillLabel'
 import { useSelector } from 'react-redux'
 import { useAuth0 } from '@auth0/auth0-react'
@@ -34,6 +34,15 @@ function formatMethod (instructionList) {
   return seperateSentances.slice(0, -1)
 }
 
+function recipeIsSaved (recipeId, recipeList) {
+  const findRecipe = recipeList.find(recipe => recipe.id === recipeId)
+  if (findRecipe.length === 0) {
+    return false
+  } else {
+    return true
+  }
+}
+
 export function Recipe (props) {
   const url = props.match.url
   const recipeId = url.slice(8)
@@ -65,8 +74,15 @@ export function Recipe (props) {
         return null
       })
       .catch(error => console.log(error))
+    fetchRecipes(token)
+      .then(recipeList => {
+        return setUserRecipeSaved(recipeIsSaved(recipeId, recipeList))
+      })
+      .catch(error => console.log(error))
   }
-  , [])
+  , [userRecipeSaved])
+
+  console.log(userRecipeSaved)
 
   const cuisines = recipe.cuisines.map(cuisine => {
     return <PillLabel key={cuisine} label={cuisine}/>
@@ -75,6 +91,12 @@ export function Recipe (props) {
   const healthLabels = recipe.diets.map(label => {
     return <PillLabel key={label} label={label}/>
   })
+
+  function handleRecipeSave (
+
+  ) {
+    // addRecipe(recipeId, recipe.title, recipe.image, token)
+  }
 
   const instructionList = formatMethod(recipe.instructions)
   const instructions = instructionList.map((instruction, index) => <li key={index}>{instruction}.</li>)
@@ -116,9 +138,17 @@ export function Recipe (props) {
             <div className='self-end'>
               {healthLabels}
             </div>
-            {/* <IfAuthenticated> */}
-            <button onClick={() => addRecipe(recipeId, recipe.title, recipe.image, token)} className='font-sans flex-none text-white px-8 py-2 bg-green-700 rounded'>Save</button>
-            {/* </IfAuthenticated> */}
+            <IfAuthenticated>
+              {!userRecipeSaved && <button onClick={() => {
+                setUserRecipeSaved(true)
+                addRecipe(recipeId, recipe.title, recipe.image, token)
+              }
+              } className='font-sans flex-none text-white px-8 py-2 bg-green-700 rounded'>Save</button>}
+              {userRecipeSaved && <button onClick={() => {
+                setUserRecipeSaved(false)
+                deleteRecipe(recipeId, token)
+              }} className='font-sans flex-none text-white px-8 py-2 bg-red-400 rounded'>Remove</button>}
+            </IfAuthenticated>
           </div>
         </div>
         <div className='mt-20'>

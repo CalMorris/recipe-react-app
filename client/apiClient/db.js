@@ -19,3 +19,13 @@ export function addRecipe (recipeId, title, imageUrl, token) {
     })
     .catch(err => console.log(err.message))
 }
+
+export function deleteRecipe (recipeId, token) {
+  return request.del(`${dbRecipe}/deleterecipe`)
+    .set('authorization', `Bearer ${token}`)
+    .send({ recipeId })
+    .then(res => {
+      return res
+    })
+    .catch(err => console.log(err.message))
+}

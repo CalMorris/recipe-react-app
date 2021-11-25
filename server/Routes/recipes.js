@@ -21,6 +21,18 @@ router.post('/addrecipe', checkJwt, async (req, res) => {
   }
 })
 
+router.delete('/deleterecipe', checkJwt, async (req, res) => {
+  const { recipeId } = req.body
+  const auth0Id = req.user?.sub
+  try {
+    const recipe = await db.deleteRecipe(auth0Id, recipeId)
+    res.json({ recipe })
+  } catch (err) {
+    console.error(err)
+    res.status(500).send(err.message)
+  }
+})
+
 router.get('/getrecipes', checkJwt, async (req, res) => {
   const auth0Id = req.user?.sub
   try {
