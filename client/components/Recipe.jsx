@@ -3,7 +3,6 @@ import { getRecipe } from '../apiClient/spoonacular'
 import { addRecipe, fetchRecipes, deleteRecipe } from '../apiClient/db'
 import { PillLabel } from './PillLabel'
 import { useSelector } from 'react-redux'
-import { useAuth0 } from '@auth0/auth0-react'
 import { IfAuthenticated } from './Authenticated'
 
 function convertMinsToDisplayTime (minutes) {
@@ -30,7 +29,9 @@ function roundIngredientMetric (ingredient) {
 
 function displayIngredients (ingrediets) {
   return ingrediets.map(ingredient => {
-    return <p className='font-sans' key={ingredient} >{roundIngredientMetric(ingredient.measures.metric.amount)} {ingredient.measures.metric.unitShort} {ingredient.nameClean}</p>
+    return <p className='font-sans' key={ingredient}>
+      {roundIngredientMetric(ingredient.measures.metric.amount)} {ingredient.measures.metric.unitShort} {ingredient.nameClean}
+    </p>
   })
 }
 
@@ -69,22 +70,6 @@ export function Recipe (props) {
 
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    getRecipe(recipeId)
-      .then(result => {
-        setRecipe(result)
-        setLoading(false)
-        return null
-      })
-      .catch(error => console.log(error))
-    fetchRecipes(token)
-      .then(recipeList => {
-        return setUserRecipeSaved(recipeIsSaved(recipeId, recipeList))
-      })
-      .catch(error => console.log(error))
-  }
-  , [userRecipeSaved])
-
   const cuisines = recipe.cuisines.map(cuisine => {
     return <PillLabel key={cuisine} label={cuisine}/>
   })
@@ -96,6 +81,21 @@ export function Recipe (props) {
   const instructionList = formatMethod(recipe.instructions)
 
   const instructions = instructionList.map((instruction, index) => <li key={index}>{instruction}.</li>)
+
+  useEffect(() => {
+    getRecipe(recipeId)
+      .then(result => {
+        setRecipe(result)
+        setLoading(false)
+        return result
+      })
+      .catch(error => console.log(error))
+    fetchRecipes(token)
+      .then(recipeList => {
+        return setUserRecipeSaved(recipeIsSaved(recipeId, recipeList))
+      })
+      .catch(error => console.log(error))
+  }, [userRecipeSaved])
 
   return (<>
     <div className='flex justify-center mt-20'>
@@ -139,11 +139,11 @@ export function Recipe (props) {
               {!userRecipeSaved && <button onClick={() => {
                 setUserRecipeSaved(true)
                 addRecipe(recipeId, recipe.title, recipe.image, token)
-              }} className='font-sans flex-none text-white px-8 py-2 bg-green-700 rounded'>Save</button>}
+              }} className='grid self-center w-2/5 font-sans flex-none text-white px-8 py-2 bg-green-700 rounded'>Save</button>}
               {userRecipeSaved && <button onClick={() => {
                 setUserRecipeSaved(false)
                 deleteRecipe(recipeId, token)
-              }} className='font-sans flex-none text-white px-8 py-2 bg-red-400 rounded'>Remove</button>}
+              }} className='grid self-center w-2/5 font-sans flex-none text-white px-8 py-2 bg-red-400 rounded'>Remove</button>}
             </IfAuthenticated>
           </div>
         </div>

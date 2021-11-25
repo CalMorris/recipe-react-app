@@ -33,6 +33,7 @@ router.delete('/deleterecipe', checkJwt, async (req, res) => {
   }
 })
 
+// router.get('/getrecipes', checkJwt, async (req, res) => {
 router.get('/getrecipes', checkJwt, async (req, res) => {
   const auth0Id = req.user?.sub
   try {
