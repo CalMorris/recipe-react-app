@@ -14,9 +14,7 @@ export function addRecipe (recipeId, title, imageUrl, token) {
   return request.post(`${dbRecipe}/addrecipe`)
     .set('authorization', `Bearer ${token}`)
     .send({ recipeId, title, imageUrl })
-    .then(res => {
-      return res
-    })
+    .then(res => res)
     .catch(err => console.log(err.message))
 }
 

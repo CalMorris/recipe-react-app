@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const db = require('../db/users')
+const db = require('../db/recipes')
 const checkJwt = require('../auth0')
 
 router.post('/addrecipe', checkJwt, async (req, res) => {

@@ -12,7 +12,6 @@ export default function UserRecipes () {
     setLoading(true)
     fetchRecipes(token)
       .then(result => {
-        console.log(result)
         setRecipes(result)
         setLoading(false)
         return null

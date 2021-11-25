@@ -3,7 +3,6 @@ import { getRecipe } from '../apiClient/spoonacular'
 import { addRecipe, fetchRecipes, deleteRecipe } from '../apiClient/db'
 import { PillLabel } from './PillLabel'
 import { useSelector } from 'react-redux'
-import { useAuth0 } from '@auth0/auth0-react'
 import { IfAuthenticated } from './Authenticated'
 
 function convertMinsToDisplayTime (minutes) {
@@ -95,7 +94,7 @@ export function Recipe (props) {
 
   const instructionList = formatMethod(recipe.instructions)
 
-  const instructions = instructionList.map((instruction, index) => <li key={index}>{instruction}.</li>)
+  const instructions = instructionList.map((instruction, index) => <li key={instruction}>{instruction}.</li>)
 
   return (<>
     <div className='flex justify-center mt-20'>
@@ -139,11 +138,11 @@ export function Recipe (props) {
               {!userRecipeSaved && <button onClick={() => {
                 setUserRecipeSaved(true)
                 addRecipe(recipeId, recipe.title, recipe.image, token)
-              }} className='font-sans flex-none text-white px-8 py-2 bg-green-700 rounded'>Save</button>}
+              }} className='w-2/6 font-sans flex-none text-white px-8 py-2 bg-green-700 rounded'>Save</button>}
               {userRecipeSaved && <button onClick={() => {
                 setUserRecipeSaved(false)
                 deleteRecipe(recipeId, token)
-              }} className='font-sans flex-none text-white px-8 py-2 bg-red-400 rounded'>Remove</button>}
+              }} className='w-2/6 font-sans flex-none text-white px-8 py-2 bg-red-400 rounded'>Remove</button>}
             </IfAuthenticated>
           </div>
         </div>
