@@ -17,14 +17,5 @@ export function setRecipesState (token) {
         return null
       })
       .catch(error => console.log(error.message))
-
-  //   return getCoreConcepts(week)
-  //     .then(concepts => {
-  //       const conceptsArray = JSON.parse(concepts[0].coreConcepts)
-  //       dispatch(setConcepts(conceptsArray))
-  //       return null
-  //     })
-  //     .catch(err => console.log(err.message))
-  // }
   }
 }
