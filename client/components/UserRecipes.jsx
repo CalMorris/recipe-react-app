@@ -4,20 +4,7 @@ import { fetchRecipes } from '../apiClient/recipes'
 import RecipeCard from './RecipeCard'
 
 export default function UserRecipes () {
-  const [recipes, setRecipes] = useState([])
-  const [loading, setLoading] = useState(false)
-  const token = useSelector(state => state.token)
-
-  useEffect(() => {
-    setLoading(true)
-    fetchRecipes(token)
-      .then(result => {
-        setRecipes(result)
-        setLoading(false)
-        return null
-      })
-      .catch(err => console.log(err.message))
-  }, [])
+  const recipes = useSelector(state => state.recipes)
 
   const recipeList = recipes.map(({ image, id, title }) => {
     return <RecipeCard
@@ -28,13 +15,13 @@ export default function UserRecipes () {
     />
   })
 
+  // recipeList ? console.log('yes') : console.log('no')s
+
   return (
     <>
-      <div className='flex justify-center mt-20'>
-        {loading && <img src='/images/loading.gif'className='w-3/6'/>}
-      </div>
       <div className='grid grid-cols-3 gap-10 mt-20 px-40'>
-        {recipeList}
+        {recipeList || <p> try aagain </p>}
+        {/* // double check this */}
       </div>
 
     </>

@@ -12,7 +12,6 @@ router.get('/id', (req, res) => {
     })
     .then(result => res.json(result.body))
     .catch(err => {
-      console.log('this does not work')
       res.status(500).send('Error connecting to API')
     })
 })

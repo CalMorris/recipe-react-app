@@ -1,4 +1,4 @@
-import { SET_RECIPES } from '../actions/recipes'
+import { SET_RECIPES, ADD_RECIPE, REMOVE_RECIPE } from '../actions/recipes'
 
 const initialRecipes = [{
   image: '',
@@ -6,14 +6,15 @@ const initialRecipes = [{
   title: ''
 }]
 
-// this needs to be reviewed
-// need to create a combine reducers
-
 export function recipes (state = initialRecipes, action) {
-  console.log(action.recipes)
   switch (action.type) {
     case SET_RECIPES:
       return action.recipes
+    case ADD_RECIPE:
+      return [...state, action.recipe]
+    case REMOVE_RECIPE:
+      const remove = state.filter(recipe => recipe.id !== action.recipeId)
+      return remove // check this fn in the reducer is working correctly
     default:
       return state
   }

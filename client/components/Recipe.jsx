@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { getRecipe } from '../apiClient/spoonacular'
-import { addRecipe, fetchRecipes, deleteRecipe } from '../apiClient/recipes'
 import { PillLabel } from './PillLabel'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { IfAuthenticated } from './Authenticated'
 import { useAuth0 } from '@auth0/auth0-react'
+import { addRecipeState, removeRecipeState } from '../actions/recipes'
 
 function convertMinsToDisplayTime (minutes) {
   const hours = Math.floor(parseInt(minutes) / 60)
@@ -40,20 +40,18 @@ function formatMethod (instructionList) {
 }
 
 function recipeIsSaved (recipeId, recipeList) {
-  const findRecipe = recipeList.find(recipe => recipe.id === recipeId)
-  if (findRecipe.length === 0) {
-    return false
-  } else {
-    return true
-  }
+  return recipeList.find(recipe => recipe.id === recipeId)
 }
 
 export function Recipe (props) {
   const url = props.match.url
   const recipeId = url.slice(8)
-  const token = useSelector(state => state.token)
+  const token = useSelector(state => state.user.token)
+  const recipes = useSelector(state => state.recipes)
   const [userRecipeSaved, setUserRecipeSaved] = useState(false)
   const { isAuthenticated } = useAuth0()
+  const dispatch = useDispatch()
+  const [loading, setLoading] = useState(true)
 
   const [recipe, setRecipe] = useState(
     {
@@ -68,26 +66,20 @@ export function Recipe (props) {
       instructions: ''
     })
 
-  const [loading, setLoading] = useState(true)
-
   useEffect(() => {
     getRecipe(recipeId)
       .then(result => {
-        console.log(result)
         setRecipe(result)
-        console.log(result)
         setLoading(false)
         return null
       })
       .catch(error => console.log(error))
-    isAuthenticated && fetchRecipes(token)
-      .then(recipeList => {
-        setUserRecipeSaved(recipeIsSaved(recipeId, recipeList))
-        return null
-      })
-      .catch(error => console.log(error))
+
+    isAuthenticated && setUserRecipeSaved(recipeIsSaved(recipeId, recipes))
   }
-  , [userRecipeSaved])
+  , [userRecipeSaved, recipes])
+
+  console.log('render')
 
   const cuisines = recipe.cuisines.map((cuisine, index) => {
     return <PillLabel key={`${index}-${cuisine}`} label={cuisine}/>
@@ -146,11 +138,11 @@ export function Recipe (props) {
             <IfAuthenticated>
               {!userRecipeSaved && <button onClick={() => {
                 setUserRecipeSaved(true)
-                addRecipe(recipeId, recipe.title, recipe.image, token)
+                dispatch(addRecipeState(recipeId, recipe.title, recipe.image, token))
               }} className='w-2/6 font-sans flex-none text-white px-8 py-2 bg-green-700 rounded'>Save</button>}
               {userRecipeSaved && <button onClick={() => {
                 setUserRecipeSaved(false)
-                deleteRecipe(recipeId, token)
+                dispatch(removeRecipeState(recipeId, token))
               }} className='w-2/6 font-sans flex-none text-white px-8 py-2 bg-red-400 rounded'>Remove</button>}
             </IfAuthenticated>
           </div>

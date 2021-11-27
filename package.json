@@ -49,13 +49,14 @@
     "express-jwt": "^6.1.0",
     "jwks-rsa": "^2.0.5",
     "knex": "^0.95.14",
+    "pg": "^8.7.1",
     "react-redux": "^7.2.6",
     "react-router-dom": "^5.2.0",
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.1",
     "sqlite3": "^5.0.2",
-    "superagent": "^6.1.0",
-    "styled-components": "^5.3.3"
+    "styled-components": "^5.3.3",
+    "superagent": "^6.1.0"
   },
   "devDependencies": {
     "@babel/core": "7.13.1",
