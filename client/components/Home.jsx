@@ -4,25 +4,12 @@ import RecipeSearch from './RecipeSearch'
 import RecipeCard from './RecipeCard'
 
 const Home = () => {
-  const [keywords, setKeywords] = useState('')
   const [recipes, setRecipes] = useState([])
   const [loading, setLoading] = useState(false)
 
-  // useEffect(() => {
-  //   // getRecipes(keywords)
-  //   //   .then((recipeList) => {
-  //   //     setRecipes(recipeList)
-  //   //     setLoading(false)
-  //   //     return null
-  //   //   })
-  //   //   .catch(err => console.log(err))
-  // }, [keywords])
-
-  function handleSubmit (event, formValue) {
+  function handleSubmit (event, keywords) {
     event.preventDefault()
-    setKeywords(formValue)
     setLoading(true)
-
     getRecipes(keywords)
       .then((recipeList) => {
         setRecipes(recipeList)
