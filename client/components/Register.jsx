@@ -13,7 +13,8 @@ function Register () {
   }
 
   useEffect(() => {
-    addUser(userData)
+    console.log(userData, user?.token)
+    addUser(userData, user?.token)
       .then(history.push('/'))
       .catch(error => console.log(error.message))
   }, [user])

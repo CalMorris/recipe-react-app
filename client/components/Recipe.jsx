@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { getRecipe } from '../apiClient/spoonacular'
-import { addRecipe, fetchRecipes, deleteRecipe } from '../apiClient/db'
+import { addRecipe, fetchRecipes, deleteRecipe } from '../apiClient/recipes'
 import { PillLabel } from './PillLabel'
 import { useSelector } from 'react-redux'
 import { IfAuthenticated } from './Authenticated'
+import { useAuth0 } from '@auth0/auth0-react'
 
 function convertMinsToDisplayTime (minutes) {
   const hours = Math.floor(parseInt(minutes) / 60)
@@ -52,6 +53,7 @@ export function Recipe (props) {
   const recipeId = url.slice(8)
   const token = useSelector(state => state.token)
   const [userRecipeSaved, setUserRecipeSaved] = useState(false)
+  const { isAuthenticated } = useAuth0()
 
   const [recipe, setRecipe] = useState(
     {
@@ -71,12 +73,14 @@ export function Recipe (props) {
   useEffect(() => {
     getRecipe(recipeId)
       .then(result => {
+        console.log(result)
         setRecipe(result)
+        console.log(result)
         setLoading(false)
         return null
       })
       .catch(error => console.log(error))
-    fetchRecipes(token)
+    isAuthenticated && fetchRecipes(token)
       .then(recipeList => {
         setUserRecipeSaved(recipeIsSaved(recipeId, recipeList))
         return null
@@ -93,9 +97,13 @@ export function Recipe (props) {
     return <PillLabel key={`${index}-${label}`} label={label}/>
   })
 
-  const instructionList = formatMethod(recipe.instructions)
-
-  const instructions = instructionList.map((instruction, index) => <li key={index.toString}>{instruction}.</li>)
+  let instructions
+  if (recipe.instructions) {
+    const instructionList = formatMethod(recipe.instructions)
+    instructions = instructionList.map((instruction, index) => <li key={index.toString}>{instruction}.</li>)
+  } else {
+    instructions = []
+  }
 
   return (<>
     <div className='flex justify-center mt-20'>
@@ -132,7 +140,7 @@ export function Recipe (props) {
             <div className='self-start'>
               {displayIngredients(recipe.extendedIngredients)}
             </div>
-            <div className='self-end'>
+            <div className='max-w-full'>
               {healthLabels}
             </div>
             <IfAuthenticated>
@@ -150,7 +158,7 @@ export function Recipe (props) {
         <div className='mt-20'>
           <h1 className='font-sans text-4xl text-center'>Method</h1>
           <div className='px-20'>
-            <ol className='list-outside list-decimal'>
+            <ol className='list-outside list-decimal' >
               {instructions}
             </ol>
           </div>

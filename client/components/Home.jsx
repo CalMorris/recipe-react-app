@@ -8,7 +8,21 @@ const Home = () => {
   const [recipes, setRecipes] = useState([])
   const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   // getRecipes(keywords)
+  //   //   .then((recipeList) => {
+  //   //     setRecipes(recipeList)
+  //   //     setLoading(false)
+  //   //     return null
+  //   //   })
+  //   //   .catch(err => console.log(err))
+  // }, [keywords])
+
+  function handleSubmit (event, formValue) {
+    event.preventDefault()
+    setKeywords(formValue)
+    setLoading(true)
+
     getRecipes(keywords)
       .then((recipeList) => {
         setRecipes(recipeList)
@@ -16,12 +30,6 @@ const Home = () => {
         return null
       })
       .catch(err => console.log(err))
-  }, [keywords])
-
-  function handleSubmit (event, formValue) {
-    event.preventDefault()
-    setKeywords(formValue)
-    setLoading(true)
     event.target.reset()
   }
 

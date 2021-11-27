@@ -3,7 +3,7 @@ const router = express.Router()
 const db = require('../db/recipes')
 const checkJwt = require('../auth0')
 
-router.post('/addrecipe', checkJwt, async (req, res) => {
+router.post('/', checkJwt, async (req, res) => {
   const { recipeId, title, imageUrl } = req.body
   const auth0Id = req.user?.sub
   const newRecipe = {
@@ -21,7 +21,7 @@ router.post('/addrecipe', checkJwt, async (req, res) => {
   }
 })
 
-router.delete('/deleterecipe', checkJwt, async (req, res) => {
+router.delete('/', checkJwt, async (req, res) => {
   const { recipeId } = req.body
   const auth0Id = req.user?.sub
   try {
@@ -33,7 +33,7 @@ router.delete('/deleterecipe', checkJwt, async (req, res) => {
   }
 })
 
-router.get('/getrecipes', checkJwt, async (req, res) => {
+router.get('/', checkJwt, async (req, res) => {
   const auth0Id = req.user?.sub
   try {
     const recipe = await db.getRecipe(auth0Id)

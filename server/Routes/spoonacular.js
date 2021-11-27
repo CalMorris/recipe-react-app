@@ -4,7 +4,7 @@ const router = express.Router()
 require('dotenv').config()
 
 router.get('/id', (req, res) => {
-  const id = req.headers.id
+  const id = req.query.id
   request.get(`https://api.spoonacular.com/recipes/${id}/information`)
     .query({
       ContentType: 'application/json',
@@ -12,25 +12,30 @@ router.get('/id', (req, res) => {
     })
     .then(result => res.json(result.body))
     .catch(err => {
-      console.log(err)
-      res.status(500).send('database error')
+      console.log('this does not work')
+      res.status(500).send('Error connecting to API')
     })
 })
 
 router.get('/recipes', (req, res) => {
-  const keywords = req.headers.keywords
+  const keywords = formatKeywords(req.query.keywords)
   request.get('https://api.spoonacular.com/recipes/findByIngredients')
     .query({
       ContentType: 'application/json',
       apiKey: process.env.API_KEY,
       ingredients: keywords,
-      number: '20'
+      number: '15'
     })
     .then(result => res.json(result.body))
     .catch(err => {
-      console.log(err.message)
-      res.status(500).send('database error')
+      res.status(500).send('Error connecting to API')
     })
 })
+
+function formatKeywords (keywords) {
+  const splitBySpace = keywords.split(' ')
+  const stringByComma = splitBySpace.join(',')
+  return stringByComma
+}
 
 module.exports = router

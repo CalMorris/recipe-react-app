@@ -1,5 +1,6 @@
 import { setUser } from './actions/user'
 import store from './store'
+import { useAuth0 } from '@auth0/auth0-react'
 
 export async function cacheUser (useAuth0, state) {
   const { isAuthenticated, getAccessTokenSilently, user } = useAuth0()
@@ -12,7 +13,6 @@ export async function cacheUser (useAuth0, state) {
         email: user.email,
         token: token
       }
-
       store.dispatch(setUser(userToSave))
     } catch (err) {
       console.error(err)

@@ -1,14 +1,17 @@
 const express = require('express')
 const router = express.Router()
 const db = require('../db/users')
+const checkJwt = require('../auth0')
 
-router.post('/add', async (req, res) => {
+router.post('/', checkJwt, async (req, res) => {
   const newUser = req.body
-  const { auth0Id, email } = newUser
+  const auth0Id = req.user.sub
+  const { email } = newUser
   const user = {
     auth0_id: auth0Id,
     email
   }
+  console.log('authorised')
   try {
     await db.createUser(user)
     res.sendStatus(201)

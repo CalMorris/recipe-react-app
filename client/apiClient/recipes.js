@@ -1,17 +1,16 @@
 import request from 'superagent'
 
-const dbRecipe = '/api/v1/db/recipes'
-// const addUserRecipe = '/api/v1/db/addrecipe'
+const dbRecipeURL = '/api/v1/db/recipes'
 
 export function fetchRecipes (token) {
-  return request.get(`${dbRecipe}/getrecipes`)
+  return request.get(dbRecipeURL)
     .set('authorization', `Bearer ${token}`)
     .then(res => res.body.recipe)
     .catch(err => console.log(err.message))
 }
 
 export function addRecipe (recipeId, title, imageUrl, token) {
-  return request.post(`${dbRecipe}/addrecipe`)
+  return request.post(dbRecipeURL)
     .set('authorization', `Bearer ${token}`)
     .send({ recipeId, title, imageUrl })
     .then(res => res)
@@ -19,7 +18,7 @@ export function addRecipe (recipeId, title, imageUrl, token) {
 }
 
 export function deleteRecipe (recipeId, token) {
-  return request.del(`${dbRecipe}/deleterecipe`)
+  return request.del(dbRecipeURL)
     .set('authorization', `Bearer ${token}`)
     .send({ recipeId })
     .then(res => {
