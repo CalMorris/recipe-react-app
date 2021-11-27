@@ -1,4 +1,4 @@
-import { fetchRecipes } from '../apiClient/db'
+import { fetchRecipes } from '../apiClient/recipes'
 
 export const SET_RECIPES = 'SET_RECIPES'
 
@@ -10,11 +10,12 @@ export function setRecipes (recipes) {
 }
 
 export function setRecipesState (token) {
-  return dispatch => {
+  return (dispatch) => {
     return fetchRecipes(token)
       .then(recipeList => {
-        dispatch(setRecipes(recipeList))
-        return null
+        console.log(recipeList)
+        return dispatch(setRecipes(recipeList))
+        // return null
       })
       .catch(error => console.log(error.message))
   }

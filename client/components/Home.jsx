@@ -2,10 +2,22 @@ import React, { useState, useEffect } from 'react'
 import { getRecipes } from '../apiClient/spoonacular'
 import RecipeSearch from './RecipeSearch'
 import RecipeCard from './RecipeCard'
+// import { fetchRecipes } from '../apiClient/recipes'
+import { useAuth0 } from '@auth0/auth0-react'
+import { setRecipesState } from '../actions/recipes'
+import { useSelector, useDispatch } from 'react-redux'
 
 const Home = () => {
   const [recipes, setRecipes] = useState([])
   const [loading, setLoading] = useState(false)
+  const { isAuthenticated } = useAuth0()
+  const token = useSelector(state => state.user.token)
+  const dispatch = useDispatch()
+
+  // console.log(isAuthenticated)
+  useEffect(() => {
+    isAuthenticated && dispatch(setRecipesState(token))
+  }, [token])
 
   function handleSubmit (event, keywords) {
     event.preventDefault()
