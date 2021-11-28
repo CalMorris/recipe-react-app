@@ -28,6 +28,7 @@ module.exports = {
     },
     migrations: {
       tableName: 'knex_migrations'
-    }
+    },
+    build: 'knex migrate:latest'
   }
 }
