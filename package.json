@@ -16,14 +16,15 @@
     "dev:server": "nodemon server",
     "start": "node server",
 
-    
+    "build": "run-p build:client build:server",
+    "build:client": "npm run webpack -- --mode production",
     "build:server": "npm run knex -- migrate:latest",
-    "build": "npm run webpack",
-    "knex": "knex --knexfile server/db/knexfile.js",
+    "webpack": "webpack --config ./client/webpack.config.js",
+    "knex": "knex --knexfile ./server/db/knexfile.js",
+    
     "server": "node server",
     "test": "jest",
     "test:watch": "jest --watchAll",
-    "webpack": "webpack --config ./client/webpack.config.js",
     "lint": "eslint --ext .js,.jsx ."
   },
   "keywords": [
