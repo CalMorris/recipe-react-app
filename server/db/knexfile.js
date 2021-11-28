@@ -17,16 +17,17 @@ module.exports = {
   },
 
   production: {
-    client: 'pg',
+    client: 'postgresql',
     connection: {
       connectionString: process.env.DATABASE_URL,
       ssl: { rejectUnauthorized: false }
     },
-    migrations: {
-      directory: path.join(__dirname, '/knex/migrations')
+    pool: {
+      min: 2,
+      max: 10
     },
-    seeds: {
-      directory: path.join(__dirname, '/knex/seeds')
+    migrations: {
+      tableName: 'knex_migrations'
     }
   }
 }
