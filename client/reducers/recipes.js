@@ -13,8 +13,7 @@ export function recipes (state = initialRecipes, action) {
     case ADD_RECIPE:
       return [...state, action.recipe]
     case REMOVE_RECIPE:
-      const remove = state.filter(recipe => recipe.id !== action.recipeId)
-      return remove
+      return state.filter(recipe => recipe.id !== action.recipeId)
     default:
       return state
   }

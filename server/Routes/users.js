@@ -11,7 +11,7 @@ router.post('/', checkJwt, async (req, res) => {
     auth0_id: auth0Id,
     email
   }
-  console.log('authorised')
+  console.log('add user route connection')
   try {
     await db.createUser(user)
     res.sendStatus(201)

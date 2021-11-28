@@ -17,7 +17,7 @@ function getUserByName (username, db = connection) {
 }
 
 function createUser (user, db = connection) {
-  console.log('user has reached db')
+  console.log('user has been added to the db', user)
   return db('users')
     .insert(user)
 }

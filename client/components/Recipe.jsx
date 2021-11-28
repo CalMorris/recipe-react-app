@@ -136,11 +136,11 @@ export function Recipe (props) {
             </div>
             <IfAuthenticated>
               {!userRecipeSaved && <button onClick={() => {
-                setUserRecipeSaved(true)
+                // setUserRecipeSaved(true)
                 dispatch(addRecipeState(recipeId, recipe.title, recipe.image, token))
               }} className='w-2/6 font-sans flex-none text-white px-8 py-2 bg-green-700 rounded'>Save</button>}
               {userRecipeSaved && <button onClick={() => {
-                setUserRecipeSaved(false)
+                // setUserRecipeSaved(false)
                 dispatch(removeRecipeState(recipeId, token))
               }} className='w-2/6 font-sans flex-none text-white px-8 py-2 bg-red-400 rounded'>Remove</button>}
             </IfAuthenticated>

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router'
 import { addUser } from '../apiClient/users'
 
 function Register () {
-  const user = useSelector(state => state)
+  const user = useSelector(state => state.user)
   const history = useHistory()
 
   const userData = {
@@ -12,12 +12,20 @@ function Register () {
     email: user?.email
   }
 
-  useEffect(() => {
-    console.log(userData, user?.token)
+  // useEffect(() => {
+  //   console.log(userData, user?.token)
+  //   // addUser(userData, user?.token)
+  //   //   .then(history.push('/'))
+  //   // .catch(error => console.log(error.message))
+  // }, [user])
+
+  setTimeout(() => {
+    console.log(user)
+    console.log(userData)
     addUser(userData, user?.token)
       .then(history.push('/'))
       .catch(error => console.log(error.message))
-  }, [user])
+  }, 3000)
 
   return (
     <>
