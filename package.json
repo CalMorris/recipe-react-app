@@ -18,7 +18,7 @@
 
     
     "build:server": "npm run knex -- migrate:latest",
-    "build": "webpack && knex migrate:latest",
+    "build": "npm run webpack",
     "knex": "knex --knexfile server/db/knexfile.js",
     "server": "node server",
     "test": "jest",
