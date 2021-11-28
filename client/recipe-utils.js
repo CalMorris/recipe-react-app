@@ -15,7 +15,7 @@ export async function cacheRecipe (useAuth0, state) {
         token: token
       }
       store.dispatch(setUser(userToSave))
-      store.dispa
+      store.dispatch(setRecipesState(token))
     } catch (err) {
       console.error(err)
     }

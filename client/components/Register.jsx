@@ -12,20 +12,9 @@ function Register () {
     email: user?.email
   }
 
-  // useEffect(() => {
-  //   console.log(userData, user?.token)
-  //   // addUser(userData, user?.token)
-  //   //   .then(history.push('/'))
-  //   // .catch(error => console.log(error.message))
-  // }, [user])
-
-  setTimeout(() => {
-    console.log(user)
-    console.log(userData)
-    addUser(userData, user?.token)
-      .then(history.push('/'))
-      .catch(error => console.log(error.message))
-  }, 3000)
+  addUser(userData, user?.token)
+    .then(history.push('/'))
+    .catch(error => console.log(error.message))
 
   return (
     <>
