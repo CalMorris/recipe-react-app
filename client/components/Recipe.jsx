@@ -30,7 +30,7 @@ function roundIngredientMetric (ingredient) {
 
 function displayIngredients (ingrediets) {
   return ingrediets.map(ingredient => {
-    return <p className='font-sans' key={ingredient} >{roundIngredientMetric(ingredient.measures.metric.amount)} {ingredient.measures.metric.unitShort} {ingredient.nameClean}</p>
+    return <p className='font-sans' key={ingredient.nameClean} >{roundIngredientMetric(ingredient.measures.metric.amount)} {ingredient.measures.metric.unitShort} {ingredient.nameClean}</p>
   })
 }
 
@@ -39,20 +39,15 @@ function formatMethod (instructionList) {
   return seperateSentances.slice(0, -1)
 }
 
-function recipeIsSaved (recipeId, recipeList) {
-  return recipeList.some(recipe => recipe.id === recipeId)
-}
-
 export function Recipe (props) {
   const url = props.match.url
   const recipeId = url.slice(8)
   const token = useSelector(state => state.user.token)
   const recipes = useSelector(state => state.recipes)
   const [userRecipeSaved, setUserRecipeSaved] = useState(false)
-
-  const { isAuthenticated } = useAuth0()
-  const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)
+  // const { isAuthenticated } = useAuth0()
+  const dispatch = useDispatch()
 
   const [recipe, setRecipe] = useState(
     {
@@ -72,13 +67,12 @@ export function Recipe (props) {
       .then(result => {
         setRecipe(result)
         setLoading(false)
+        const isSaved = recipes.some(recipe => recipe.recipeId === recipeId)
+        setUserRecipeSaved(isSaved)
         return null
       })
       .catch(error => console.log(error))
-    // isAuthenticated && setUserRecipeSaved(recipes.find(recipe => recipe.id === recipeId))
-    isAuthenticated && setUserRecipeSaved(recipeIsSaved(recipeId, recipes))
-  }
-  , [userRecipeSaved, recipes]) // does this need to be in use effect?
+  }, [userRecipeSaved, recipes])
 
   const cuisines = recipe.cuisines.map((cuisine, index) => {
     return <PillLabel key={`${index}-${cuisine}`} label={cuisine}/>
@@ -91,7 +85,7 @@ export function Recipe (props) {
   let instructions
   if (recipe.instructions) {
     const instructionList = formatMethod(recipe.instructions)
-    instructions = instructionList.map((instruction, index) => <li key={index.toString}>{instruction}.</li>)
+    instructions = instructionList.map((instruction, index) => <li key={instruction}>{instruction}.</li>)
   } else {
     instructions = []
   }
@@ -136,12 +130,12 @@ export function Recipe (props) {
             </div>
             <IfAuthenticated>
               {!userRecipeSaved && <button onClick={() => {
-                // setUserRecipeSaved(true)
                 dispatch(addRecipeState(recipeId, recipe.title, recipe.image, token))
+                // setUserRecipeSaved(true)
               }} className='w-2/6 font-sans flex-none text-white px-8 py-2 bg-green-700 rounded'>Save</button>}
               {userRecipeSaved && <button onClick={() => {
-                // setUserRecipeSaved(false)
                 dispatch(removeRecipeState(recipeId, token))
+                // setUserRecipeSaved(false)
               }} className='w-2/6 font-sans flex-none text-white px-8 py-2 bg-red-400 rounded'>Remove</button>}
             </IfAuthenticated>
           </div>

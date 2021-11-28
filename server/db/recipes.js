@@ -7,7 +7,7 @@ async function addRecipe (recipe, db = connection) {
 
 async function getRecipe (auth0id, db = connection) {
   return db('recipes')
-    .select('recipe_id as id', 'recipe_title as title', 'recipe_image_url as image')
+    .select('recipe_id as recipeId', 'recipe_title as title', 'recipe_image_url as image')
     .where('auth0_id', auth0id)
 }
 
