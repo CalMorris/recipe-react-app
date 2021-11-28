@@ -16,19 +16,6 @@ module.exports = {
     }
   },
 
-  staging: {
-    client: 'postgresql',
-    connection: {
-      filename: path.join(__dirname, '/dev.sqlite3')
-    },
-    migrations: {
-      directory: path.join(__dirname, '/knex/migrations')
-    },
-    seeds: {
-      directory: path.join(__dirname, '/knex/seeds')
-    }
-  },
-
   production: {
     client: 'postgresql',
     connection: {
