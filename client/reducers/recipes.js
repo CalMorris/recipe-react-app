@@ -14,7 +14,7 @@ export function recipes (state = initialRecipes, action) {
       return [...state, action.recipe]
     case REMOVE_RECIPE:
       const remove = state.filter(recipe => recipe.id !== action.recipeId)
-      return remove // check this fn in the reducer is working correctly
+      return remove
     default:
       return state
   }

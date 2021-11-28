@@ -1,10 +1,9 @@
 import { setUser } from './actions/user'
 import store from './store'
 import { useAuth0 } from '@auth0/auth0-react'
-
 import { setRecipesState } from './actions/recipes'
 
-export async function cacheUser (useAuth0, state) {
+export async function cacheRecipe (useAuth0, state) {
   const { isAuthenticated, getAccessTokenSilently, user } = useAuth0()
 
   if (isAuthenticated && !state?.token) {
@@ -16,7 +15,6 @@ export async function cacheUser (useAuth0, state) {
         token: token
       }
       store.dispatch(setUser(userToSave))
-      store.dispatch(setRecipesState(token))
     } catch (err) {
       console.error(err)
     }

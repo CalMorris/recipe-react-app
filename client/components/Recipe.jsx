@@ -40,7 +40,7 @@ function formatMethod (instructionList) {
 }
 
 function recipeIsSaved (recipeId, recipeList) {
-  return recipeList.find(recipe => recipe.id === recipeId)
+  return recipeList.some(recipe => recipe.id === recipeId)
 }
 
 export function Recipe (props) {
@@ -49,6 +49,7 @@ export function Recipe (props) {
   const token = useSelector(state => state.user.token)
   const recipes = useSelector(state => state.recipes)
   const [userRecipeSaved, setUserRecipeSaved] = useState(false)
+
   const { isAuthenticated } = useAuth0()
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)
@@ -74,12 +75,10 @@ export function Recipe (props) {
         return null
       })
       .catch(error => console.log(error))
-
+    // isAuthenticated && setUserRecipeSaved(recipes.find(recipe => recipe.id === recipeId))
     isAuthenticated && setUserRecipeSaved(recipeIsSaved(recipeId, recipes))
   }
-  , [userRecipeSaved, recipes])
-
-  console.log('render')
+  , [userRecipeSaved, recipes]) // does this need to be in use effect?
 
   const cuisines = recipe.cuisines.map((cuisine, index) => {
     return <PillLabel key={`${index}-${cuisine}`} label={cuisine}/>
