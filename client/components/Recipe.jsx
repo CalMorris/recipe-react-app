@@ -98,7 +98,7 @@ export function Recipe (props) {
     </div>
 
     { !loading &&
-      <div className=' pb-20 mt-20 px-28'>
+      <div className=' mb-20 mt-20 px-28'>
         <div className='bg-white grid grid-cols-2 gap-2'>
 
           <div className=' h-full'>
