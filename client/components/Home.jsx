@@ -42,7 +42,7 @@ const Home = () => {
   })
 
   return (<>
-    <div className='h-screen bg-cover bg-no-repeat bg-center' style={{ backgroundImage: 'url(/images/bg.png)' }}>
+    <div className='h-screen bg-cover bg-no-repeat bg-center' style={{ backgroundImage: 'url(/images/bg.jpg)' }}>
       <RecipeSearch handleSubmit={handleSubmit}/>
 
       <div className='flex justify-center mt-20'>
