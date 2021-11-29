@@ -2,7 +2,7 @@ const connection = require('./connection')
 
 async function addRecipe (recipe, db = connection) {
   return db('recipes')
-    .insert(recipe)
+    .insert(recipe, 'id')
 }
 
 async function getRecipe (auth0id, db = connection) {
