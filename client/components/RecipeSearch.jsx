@@ -10,7 +10,7 @@ export default function RecipeSearch (props) {
   }
 
   return (<>
-    <div className="pt-60 px-60 ">
+    <div className="pt-6 px-4 pt-60 px-60">
       <div className=" w-full h-full" />
       <h1 className="text-center text-green-700 text-4xl" style={{ fontFamily: 'Lucida Handwriting', fontSize: '2rem', fontWeight: 'bold' }}>Find The Perfect Recipe</h1>
       <div className='flex px-20 py-4'>

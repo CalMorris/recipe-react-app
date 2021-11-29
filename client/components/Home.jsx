@@ -14,7 +14,6 @@ const Home = () => {
   const token = useSelector(state => state.user.token)
   const dispatch = useDispatch()
 
-  // console.log(isAuthenticated)
   useEffect(() => {
     isAuthenticated && dispatch(setRecipesState(token))
   }, [token])
@@ -49,7 +48,7 @@ const Home = () => {
       <div className='flex justify-center mt-20'>
         {loading && <img src='/images/loading.gif'className='w-3/6'/>}
       </div>
-      <div className='grid grid-cols-3 gap-10 mt-20 px-40'>
+      <div className='grid grid-cols-1  sm:grid-cols-3 sm:gap-10 sm:mt-20 sm:px-40'>
         {recipeList}
       </div>
     </div>

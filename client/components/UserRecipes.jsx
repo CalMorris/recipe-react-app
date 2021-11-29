@@ -6,12 +6,6 @@ import RecipeCard from './RecipeCard'
 export default function UserRecipes () {
   const recipes = useSelector(state => state.recipes)
   const [isList, setIsList] = useState(false)
-  // const [loading, is ]
-
-  // useEffect(() => {
-
-  // }
-  // , [recipes])
 
   const recipeList = recipes.map(({ image, recipeId, title }) => {
     return <RecipeCard
@@ -21,12 +15,6 @@ export default function UserRecipes () {
       title={title}
     />
   })
-
-  // if (recipes[0].title === '') {
-  //   setIsList(true)
-  // }
-
-  // console.log(recipes)
 
   return (
     <>

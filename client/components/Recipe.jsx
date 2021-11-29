@@ -6,7 +6,7 @@ import { IfAuthenticated } from './Authenticated'
 import { useAuth0 } from '@auth0/auth0-react'
 import { addRecipeState, removeRecipeState } from '../actions/recipes'
 
-function convertMinsToDisplayTime (minutes) {
+export function convertMinsToDisplayTime (minutes) {
   const hours = Math.floor(parseInt(minutes) / 60)
   const hoursMinutes = parseInt(minutes) - (hours * 60)
 
@@ -18,12 +18,14 @@ function convertMinsToDisplayTime (minutes) {
     }
   } else if (hours === 0 && hoursMinutes < 60) {
     return `${minutes} mins`
+  } else if (hours > 1 && hoursMinutes < 60) {
+    return `${String(hours)} hrs ${String(hoursMinutes)} mins`
   } else {
     return `${String(hours)} hr ${String(hoursMinutes)} mins`
   }
 }
 
-function roundIngredientMetric (ingredient) {
+export function roundIngredientMetric (ingredient) {
   const ingredientFloat = parseFloat(ingredient)
   return String(Math.floor(ingredientFloat))
 }
@@ -34,7 +36,7 @@ function displayIngredients (ingrediets) {
   })
 }
 
-function formatMethod (instructionList) {
+export function formatMethod (instructionList) {
   const seperateSentances = instructionList.split('.')
   return seperateSentances.slice(0, -1)
 }
