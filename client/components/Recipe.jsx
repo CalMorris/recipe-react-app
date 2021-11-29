@@ -87,7 +87,7 @@ export function Recipe (props) {
   let instructions
   if (recipe.instructions) {
     const instructionList = formatMethod(recipe.instructions)
-    instructions = instructionList.map((instruction) => <li key={instruction}>{{ __html:} instruction }.</li>)
+    instructions = instructionList.map((instruction) => <li key={instruction}>{ instruction }.</li>)
   } else {
     instructions = []
   }
@@ -146,7 +146,7 @@ export function Recipe (props) {
           <h1 className='font-sans text-4xl text-center'>Method</h1>
           <div className='px-20'>
             <ol className='list-outside list-decimal' >
-            dangerouslySetInnerHTML={instructions}
+              {instructions}
             </ol>
           </div>
         </div>
