@@ -81,13 +81,13 @@ export function Recipe (props) {
   })
 
   const healthLabels = recipe.diets.map((label, index) => {
-    return <PillLabel key={`${index}-${label}`} label={label}/>
+    if (index < 2) return <PillLabel key={`${index}-${label}`} label={label}/>
   })
 
   let instructions
   if (recipe.instructions) {
     const instructionList = formatMethod(recipe.instructions)
-    instructions = instructionList.map((instruction, index) => <li key={instruction}>{instruction}.</li>)
+    instructions = instructionList.map((instruction) => <li key={instruction}>{{ __html:} instruction }.</li>)
   } else {
     instructions = []
   }
@@ -146,7 +146,7 @@ export function Recipe (props) {
           <h1 className='font-sans text-4xl text-center'>Method</h1>
           <div className='px-20'>
             <ol className='list-outside list-decimal' >
-              {instructions}
+            dangerouslySetInnerHTML={instructions}
             </ol>
           </div>
         </div>
