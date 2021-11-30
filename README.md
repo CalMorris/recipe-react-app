@@ -1,7 +1,7 @@
 # Full stack application for recipes
 
 This project uses the spoonacular api to find recipes using keywords and recipe id's. To use this app, please sign up to spoonacular and generate an API key.
-The api key will need to be added on the server side routes to the labelled areas `process.env.API_KEY`
+The api key will replace the code named `process.env.API_KEY` server side routes.
 
 ## Getting Started
 First, run the development server:
