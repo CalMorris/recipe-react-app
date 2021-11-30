@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { IfAuthenticated } from './Authenticated'
 import { useAuth0 } from '@auth0/auth0-react'
 import { addRecipeState, removeRecipeState } from '../actions/recipes'
+import { addRecipeClient, removeRecipeClient } from '../actions/client'
 
 export function convertMinsToDisplayTime (minutes) {
   const hours = Math.floor(parseInt(minutes) / 60)
@@ -45,10 +46,11 @@ export function Recipe (props) {
   const url = props.match.url
   const recipeId = url.slice(8)
   const token = useSelector(state => state.user.token)
-  const recipes = useSelector(state => state.recipes)
-  const [userRecipeSaved, setUserRecipeSaved] = useState(false)
+  const recipes = useSelector(state => state.recipesClient) // recipes live here
+
+  const [userRecipeSaved, setUserRecipeSaved] = useState(false) // truthy value
+
   const [loading, setLoading] = useState(true)
-  // const { isAuthenticated } = useAuth0()
   const dispatch = useDispatch()
 
   const [recipe, setRecipe] = useState(
@@ -65,12 +67,12 @@ export function Recipe (props) {
     })
 
   useEffect(() => {
+    const isSaved = recipes.some(recipe => recipe.recipeId === recipeId)
+    setUserRecipeSaved(isSaved)
     getRecipe(recipeId)
       .then(result => {
         setRecipe(result)
         setLoading(false)
-        const isSaved = recipes.some(recipe => recipe.recipeId === recipeId)
-        setUserRecipeSaved(isSaved)
         return null
       })
       .catch(error => console.log(error))
@@ -131,14 +133,14 @@ export function Recipe (props) {
               {healthLabels}
             </div>
             <IfAuthenticated>
-              {!userRecipeSaved && <button onClick={() => {
-                dispatch(addRecipeState(recipeId, recipe.title, recipe.image, token))
-                // setUserRecipeSaved(true)
-              }} className='w-2/6 font-sans flex-none text-white px-8 py-2 bg-green-700 rounded'>Save</button>}
-              {userRecipeSaved && <button onClick={() => {
+              {userRecipeSaved ? <button onClick={() => {
                 dispatch(removeRecipeState(recipeId, token))
-                // setUserRecipeSaved(false)
-              }} className='w-2/6 font-sans flex-none text-white px-8 py-2 bg-red-400 rounded'>Remove</button>}
+                dispatch(removeRecipeClient(recipeId))
+              }} className='w-2/6 font-sans flex-none text-white px-8 py-2 bg-red-400 rounded'>Remove</button>
+                : <button onClick={() => {
+                  dispatch(addRecipeState(recipeId, recipe.title, recipe.image, token))
+                  dispatch(addRecipeClient({ recipeId, title: recipe.title, image: recipe.image }))
+                }} className='w-2/6 font-sans flex-none text-white px-8 py-2 bg-green-700 rounded'>Save</button>}
             </IfAuthenticated>
           </div>
         </div>

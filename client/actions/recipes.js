@@ -1,5 +1,5 @@
 import { fetchRecipes, addRecipe, deleteRecipe } from '../apiClient/recipes'
-
+import { setRecipeClient } from './client'
 export const SET_RECIPES = 'SET_RECIPES'
 export const ADD_RECIPE = 'ADD_RECIPE'
 export const REMOVE_RECIPE = 'REMOVE_RECIPE'
@@ -38,7 +38,11 @@ export function removeRecipeState (recipeId, token) {
 export function setRecipesState (token) {
   return (dispatch) => {
     return fetchRecipes(token)
-      .then(recipeList => dispatch(setRecipes(recipeList)))
+      .then(recipeList => {
+        dispatch(setRecipes(recipeList))
+        dispatch(setRecipeClient(recipeList))
+        return null
+      })
       .catch(error => console.log(error.message))
   }
 }
