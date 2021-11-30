@@ -84,7 +84,7 @@ describe('fetchRecipeState', () => {
   expect.assertions(1)
   const dispatch = jest.fn()
   it('call the dispatch function', () => {
-    return addRecipeState('1234', 'Chicken Pizza', 'pizzaUrl')(dispatch) // higher order function // assert what was called
+    return addRecipeState('1234', 'Chicken Pizza', 'pizzaUrl')(dispatch) // higher order function // assert the function called
       // eslint-disable-next-line promise/always-return
       .then(() => {
         expect(dispatch.mock.calls[0][0].type).toBe(ADD_RECIPE)
