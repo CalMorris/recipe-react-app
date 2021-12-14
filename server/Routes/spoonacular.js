@@ -11,7 +11,7 @@ router.get('/id', (req, res) => {
       apiKey: process.env.API_KEY
     })
     .then(result => res.json(result.body))
-    .catch(err => {
+    .catch(() => {
       res.status(500).send('Error connecting to API')
     })
 })
@@ -26,7 +26,7 @@ router.get('/recipes', (req, res) => {
       number: '15'
     })
     .then(result => res.json(result.body))
-    .catch(err => {
+    .catch(() => {
       res.status(500).send('Error connecting to API')
     })
 })

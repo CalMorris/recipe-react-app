@@ -15,6 +15,19 @@ module.exports = {
       directory: path.join(__dirname, '/knex/seeds')
     }
   },
+  test: {
+    client: 'sqlite3',
+    connection: {
+      filename: ':memory:'
+    },
+    migrations: {
+      directory: path.join(__dirname, '/knex/migrations')
+    },
+    seeds: {
+      directory: path.join(__dirname, '/knex/seeds')
+    },
+    useNullAsDefault: true
+  },
 
   production: {
     client: 'postgresql',
@@ -33,5 +46,4 @@ module.exports = {
       directory: path.join(__dirname, '/knex/seeds')
     }
   }
-
 }
