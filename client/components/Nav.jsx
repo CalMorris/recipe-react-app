@@ -1,6 +1,7 @@
 import React from 'react'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import { useAuth0 } from '@auth0/auth0-react'
+import { Box, Image } from '@chakra-ui/react'
 
 export default function Nav () {
   const { logout, loginWithRedirect } = useAuth0()
@@ -21,9 +22,9 @@ export default function Nav () {
   }
 
   return (
-    <div className='content-center px-10 text-4xl md:text-lg h-12 border-b-2 border-green-700 py-2 border-opacity-50 bg-white flex justify-between'>
+    <Box height='40px'>
       <a href="/">
-        <img className='h-full' src="/images/food-logo.jpeg" alt="image of logo" />
+        <Image src="/images/food-logo.jpeg" alt="image of logo" objectFit='cover' height='100%'/>
       </a>
       <div>
 
@@ -39,6 +40,6 @@ export default function Nav () {
           <a href='/' className= 'px-4' onClick={handleSignIn}>Sign in</a>
         </IfNotAuthenticated>
       </div>
-    </div>
+    </Box>
   )
 }

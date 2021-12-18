@@ -3,6 +3,16 @@ const router = express.Router()
 const db = require('../db/recipes')
 const checkJwt = require('../auth0')
 
+router.get('/', checkJwt, async (req, res) => {
+  const auth0Id = req.user?.sub
+  try {
+    const recipe = await db.getRecipe(auth0Id)
+    res.json({ recipe })
+  } catch (err) {
+    res.status(500).send(err.message)
+  }
+})
+
 router.post('/', checkJwt, async (req, res) => {
   const { recipeId, title, imageUrl } = req.body
   const auth0Id = req.user?.sub
@@ -29,16 +39,6 @@ router.delete('/', checkJwt, async (req, res) => {
     res.json({ recipe })
   } catch (err) {
     console.error(err)
-    res.status(500).send(err.message)
-  }
-})
-
-router.get('/', checkJwt, async (req, res) => {
-  const auth0Id = req.user?.sub
-  try {
-    const recipe = await db.getRecipe(auth0Id)
-    res.json({ recipe })
-  } catch (err) {
     res.status(500).send(err.message)
   }
 })

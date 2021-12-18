@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Box, Button, Input, Flex, Spacer } from '@chakra-ui/react'
 
 export default function RecipeSearch (props) {
   const [inputValue, setInputValue] = useState('')
@@ -10,20 +11,24 @@ export default function RecipeSearch (props) {
   }
 
   return (<>
-    <div className="pt-6 px-4 pt-60 px-60">
-      <div className=" w-full h-full" />
-      <h1 className="text-center text-green-700 text-4xl" style={{ fontFamily: 'Lucida Handwriting', fontSize: '2rem', fontWeight: 'bold' }}>Find The Perfect Recipe</h1>
-      <div className='flex px-20 py-4'>
-        <form className='flex gap-4 w-screen z-10' onSubmit={(e) => handleSubmit(e, inputValue)}>
-          <input className='focus:outline-none focus:ring-4 focus:ring-green-700 focus:ring-opacity-50 border-2 border-green-700 pl-4 flex-grow rounded'
+    <Box width='100%' maxW="800px">
+      <h1 text="center">Find The Perfect Recipe</h1>
+      <form onSubmit={(e) => handleSubmit(e, inputValue)}>
+        <Flex>
+          <Input
+            backgroundColor='white'
+            borderColor='green.600'
+            focusBorderColor='green.600'
             placeholder="🔍 Search by Keywords"
             type="text"
             onChange={handleChange}/>
-          <button className='px-8 py-2 bg-green-700 rounded border-black flex-none font-sans text-white'
-            type="submit">Search</button>
-        </form>
-      </div>
-    </div>
+          <Spacer/>
+          <Button ml={[2, 4]} type='submit' backgroundColor='green.600' color='white' solid fontSize={['sm', 'md', 'lg', 'xl']}>
+            Search
+          </Button>
+        </Flex>
+      </form>
+    </Box>
   </>
   )
 }

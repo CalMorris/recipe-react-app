@@ -1,10 +1,15 @@
-import React from 'react'
+// import React from 'react'
+
+import * as React from 'react'
+
 import ReactDOM from 'react-dom'
 import { HashRouter as Router } from 'react-router-dom'
 import { Auth0Provider } from '@auth0/auth0-react'
 import { Provider } from 'react-redux'
 import store from './store'
 import App from './components/App'
+
+import { ChakraProvider } from '@chakra-ui/react'
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
@@ -16,7 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
     >
       <Provider store={store}>
         <Router>
-          <App />
+          <ChakraProvider>
+            <App />
+          </ChakraProvider>
         </Router>
       </Provider>
     </Auth0Provider>

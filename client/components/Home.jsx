@@ -6,6 +6,8 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { setRecipesState } from '../actions/recipes'
 import { useSelector, useDispatch } from 'react-redux'
 
+import { Box, Container, Flex, SimpleGrid } from '@chakra-ui/react'
+
 const Home = () => {
   const [recipes, setRecipes] = useState([])
   const [loading, setLoading] = useState(false)
@@ -41,16 +43,26 @@ const Home = () => {
   })
 
   return (<>
-    <div className='h-screen bg-cover bg-no-repeat bg-center' style={{ backgroundImage: 'url(/images/bg.jpg)' }}>
-      <RecipeSearch handleSubmit={handleSubmit}/>
+    <Box height='100%' px={[4, 6, 20, 40]} h='90vh ' backgroundImage='url(/images/bg.jpg)' backgroundPosition="center"
+      backgroundRepeat="no-repeat" backgroundSize='cover'>
+      <Flex justify='center' pt={[36, 44, 60]}>
+        <RecipeSearch handleSubmit={handleSubmit}/>
+      </Flex>
 
-      <div className='flex justify-center mt-20'>
-        {loading && <img src='/images/loading.gif'className='w-3/6'/>}
-      </div>
-      <div className='grid grid-cols-1  sm:grid-cols-3 sm:gap-10 sm:mt-20 sm:px-40'>
-        {recipeList}
-      </div>
-    </div>
+      <Box mt={[16, 20, 24, 30]}>
+        <Container maxW='700px' centerContent>
+          {loading && <img src='/images/loading.gif'/>}
+        </Container>
+      </Box>
+
+      <Box mt={[16, 20, 24, 30]} centerContent>
+        {/* <Container maxW='700px' centerContent> */}
+        <SimpleGrid maxW='1300px' minChildWidth='250px' gap={4} centerContent justifyContent='center'>
+          {!loading && recipeList}
+        </SimpleGrid>
+        {/* </Container> */}
+      </Box>
+    </Box>
   </>
   )
 }
