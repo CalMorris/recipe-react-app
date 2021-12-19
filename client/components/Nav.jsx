@@ -1,7 +1,7 @@
 import React from 'react'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import { useAuth0 } from '@auth0/auth0-react'
-import { Box, Image } from '@chakra-ui/react'
+import { Flex, Spacer, Box, Image, Link } from '@chakra-ui/react'
 
 export default function Nav () {
   const { logout, loginWithRedirect } = useAuth0()
@@ -22,24 +22,32 @@ export default function Nav () {
   }
 
   return (
-    <Box height='40px'>
-      <a href="/">
+    <Flex height='40px' px={[2, 4, 8]} py='1'>
+      <Link href="/">
         <Image src="/images/food-logo.jpeg" alt="image of logo" objectFit='cover' height='100%'/>
-      </a>
-      <div>
-
-        <a href="/" className='text-green-700 px-4'>
-      Home
-        </a>
+      </Link>
+      <Spacer/>
+      <Box>
+        <Link color='green.600' mx='2' href="/" className='text-green-700 px-4'>
+          Home
+        </Link>
         <IfAuthenticated>
-          <a href='/#/myrecipes' className='text-green-700 px-4' >My Recipes</a>
-          <a href='/' className='text-gray-500 px-4' onClick={handleLogoff}>Logout</a>
+          <Link mx='2' href='/#/myrecipes' className='text-green-700 px-4' >
+            My Recipes
+          </Link>
+          <Link mx='2' href='/' className='text-gray-500 px-4' onClick={handleLogoff}>
+            Logout
+          </Link>
         </IfAuthenticated>
         <IfNotAuthenticated>
-          <a href='/' className= 'px-4' onClick={handleRegister}>Register</a>
-          <a href='/' className= 'px-4' onClick={handleSignIn}>Sign in</a>
+          <Link mx='2' href='/' className= 'px-4' onClick={handleRegister}>
+            Register
+          </Link>
+          <Link mx='2' href='/' className= 'px-4' onClick={handleSignIn}>
+            Sign in
+          </Link>
         </IfNotAuthenticated>
-      </div>
-    </Box>
+      </Box>
+    </Flex>
   )
 }

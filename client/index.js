@@ -1,5 +1,3 @@
-// import React from 'react'
-
 import * as React from 'react'
 
 import ReactDOM from 'react-dom'
@@ -11,9 +9,8 @@ import App from './components/App'
 
 import { ChakraProvider } from '@chakra-ui/react'
 import theme from '../server/public/extendedTheme'
-// import '@fontsource/quattrocento/400.css'
-import '@fontsource/raleway/400.css'
-import '@fontsource/open-sans/700.css'
+import '@fontsource/sora/400.css'
+import '@fontsource/jetbrains-mono/400.css'
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
@@ -25,7 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
     >
       <Provider store={store}>
         <Router>
-          <ChakraProvider theme={theme}>
+          {/* <ChakraProvider theme={theme}> */}
+          <ChakraProvider>
             <App />
           </ChakraProvider>
         </Router>

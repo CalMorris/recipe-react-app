@@ -42,8 +42,8 @@ const Home = () => {
     />
   })
 
-  return (<>
-    <Box height='100%' px={[4, 6, 20, 40]} h='90vh ' backgroundImage='url(/images/bg.jpg)' backgroundPosition="center"
+  return (
+    <Box height='100%' px={[4, 6, 20, 40]} pb='36' h='90vh ' backgroundImage='url(/images/bg.jpg)' backgroundPosition="center"
       backgroundRepeat="no-repeat" backgroundSize='cover'>
       <Flex justify='center' pt={[36, 44, 60]}>
         <RecipeSearch handleSubmit={handleSubmit}/>
@@ -61,7 +61,6 @@ const Home = () => {
         </SimpleGrid>
       </Box>
     </Box>
-  </>
   )
 }
 

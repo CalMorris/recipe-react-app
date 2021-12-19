@@ -12,7 +12,7 @@ export default function RecipeSearch (props) {
 
   return (<>
     <Box width='100%' maxW="800px">
-      <Heading>Find The Perfect Recipe</Heading>
+      <Heading as='h1' size='xl' color='green.600' pb='2' text="center">Find The Perfect Recipe</Heading>
       <form onSubmit={(e) => handleSubmit(e, inputValue)}>
         <Flex>
           <Input
