@@ -10,6 +10,10 @@ import store from './store'
 import App from './components/App'
 
 import { ChakraProvider } from '@chakra-ui/react'
+import theme from '../server/public/extendedTheme'
+// import '@fontsource/quattrocento/400.css'
+import '@fontsource/raleway/400.css'
+import '@fontsource/open-sans/700.css'
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
@@ -21,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     >
       <Provider store={store}>
         <Router>
-          <ChakraProvider>
+          <ChakraProvider theme={theme}>
             <App />
           </ChakraProvider>
         </Router>

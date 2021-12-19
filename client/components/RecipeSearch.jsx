@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Button, Input, Flex, Spacer } from '@chakra-ui/react'
+import { Box, Button, Input, Flex, Spacer, Heading } from '@chakra-ui/react'
 
 export default function RecipeSearch (props) {
   const [inputValue, setInputValue] = useState('')
@@ -12,7 +12,7 @@ export default function RecipeSearch (props) {
 
   return (<>
     <Box width='100%' maxW="800px">
-      <h1 text="center">Find The Perfect Recipe</h1>
+      <Heading>Find The Perfect Recipe</Heading>
       <form onSubmit={(e) => handleSubmit(e, inputValue)}>
         <Flex>
           <Input

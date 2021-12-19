@@ -56,7 +56,7 @@ const Home = () => {
       </Box>
 
       <Box mt={[16, 20, 24, 30]} centerContent>
-        <SimpleGrid maxW='1300px' minChildWidth='250px' gap={4} centerContent justifyContent='center'>
+        <SimpleGrid maxW='1300px' minChildWidth='250px' gap={8} centerContent justifyContent='center'>
           {!loading && recipeList}
         </SimpleGrid>
       </Box>
