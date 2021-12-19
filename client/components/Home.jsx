@@ -33,7 +33,7 @@ const Home = () => {
   }
 
   const recipeList = recipes.map(({ image, id, title, likes }) => {
-    return <RecipeCard
+    return <RecipeCard h='100%'
       key={`${id}-${title}`}
       id={id}
       image={image}
@@ -56,11 +56,9 @@ const Home = () => {
       </Box>
 
       <Box mt={[16, 20, 24, 30]} centerContent>
-        {/* <Container maxW='700px' centerContent> */}
         <SimpleGrid maxW='1300px' minChildWidth='250px' gap={4} centerContent justifyContent='center'>
           {!loading && recipeList}
         </SimpleGrid>
-        {/* </Container> */}
       </Box>
     </Box>
   </>
