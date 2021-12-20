@@ -122,35 +122,35 @@ export function Recipe (props) {
                     <Text color='green.700'>🍴 {recipe.servings} servings</Text>
                   </Box>
                   <Box>
-                    <Text backgroundColor='green.600' color='white' borderRadius='15px' align='center'>
+                    <Text>
                       {cuisines}
                     </Text>
                   </Box>
                 </SimpleGrid>
               </Box>
-              <Box className='self-start'>
+              <Box>
                 {displayIngredients(recipe.extendedIngredients)}
               </Box>
-              <Box className='max-w-full'>
+              <Box>
                 {healthLabels}
               </Box>
               <IfAuthenticated>
                 {userRecipeSaved ? <button onClick={() => {
                   dispatch(removeRecipeState(recipeId, token))
                   dispatch(removeRecipeClient(recipeId))
-                }} className='w-2/6 font-sans flex-none text-white px-8 py-2 bg-red-400 rounded'>Remove</button>
+                }} backgroundColor='red.600' color='white' borderRadius='15px' align='center'>Remove</button>
                   : <button onClick={() => {
                     dispatch(addRecipeState(recipeId, recipe.title, recipe.image, token))
                     dispatch(addRecipeClient({ recipeId, title: recipe.title, image: recipe.image }))
-                  }} className='w-2/6 font-sans flex-none text-white px-8 py-2 bg-green-700 rounded'>Save</button>}
+                  }} backgroundColor='green.600' color='white' borderRadius='15px' align='center'>Save</button>}
               </IfAuthenticated>
             </Box>
           </Stack>
           <Box mt={[6, 10, 20]} px={[2, 4, 8, 10]}>
 
             <Heading align={['left', 'center']} as='h2' size='lg' p={[2, 4]} color='green.600'>Method</Heading>
-            <Box className='px-20'>
-              <UnorderedList className='list-outside list-decimal' >
+            <Box>
+              <UnorderedList >
                 {instructions}
               </UnorderedList>
             </Box>
