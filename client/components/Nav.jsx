@@ -22,7 +22,7 @@ export default function Nav () {
   }
 
   return (
-    <Flex height='40px' px={[2, 4, 8]} py='1'>
+    <Flex height='40px' px={[2, 4, 8]} py='1' backgroundColor='white'>
       <Link href="/">
         <Image src="/images/food-logo.jpeg" alt="image of logo" objectFit='cover' height='100%'/>
       </Link>

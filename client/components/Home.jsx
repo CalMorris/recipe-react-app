@@ -6,7 +6,7 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { setRecipesState } from '../actions/recipes'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { Box, Container, Flex, SimpleGrid } from '@chakra-ui/react'
+import { Box, Container, Flex, SimpleGrid, Image } from '@chakra-ui/react'
 
 const Home = () => {
   const [recipes, setRecipes] = useState([])
@@ -51,7 +51,7 @@ const Home = () => {
 
       <Box mt={[16, 20, 24, 30]}>
         <Container maxW='700px' centerContent>
-          {loading && <img src='/images/loading.gif'/>}
+          {loading && <Image src='/images/loading.gif'/>}
         </Container>
       </Box>
 

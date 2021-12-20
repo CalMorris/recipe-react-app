@@ -6,11 +6,7 @@ import { Auth0Provider } from '@auth0/auth0-react'
 import { Provider } from 'react-redux'
 import store from './store'
 import App from './components/App'
-
 import { ChakraProvider } from '@chakra-ui/react'
-import theme from '../server/public/extendedTheme'
-import '@fontsource/sora/400.css'
-import '@fontsource/jetbrains-mono/400.css'
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
@@ -22,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     >
       <Provider store={store}>
         <Router>
-          {/* <ChakraProvider theme={theme}> */}
           <ChakraProvider>
             <App />
           </ChakraProvider>
