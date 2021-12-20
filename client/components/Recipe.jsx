@@ -6,7 +6,6 @@ import { IfAuthenticated } from './Authenticated'
 import { useAuth0 } from '@auth0/auth0-react'
 import { addRecipeState, removeRecipeState } from '../actions/recipes'
 import { addRecipeClient, removeRecipeClient } from '../actions/client'
-
 import { Stack, Box, Container, SimpleGrid, Text, Heading, Image, Link, UnorderedList, ListItem } from '@chakra-ui/react'
 
 export function convertMinsToDisplayTime (minutes) {
@@ -104,10 +103,8 @@ export function Recipe (props) {
       </Box>
 
       { !loading &&
-      // <Box mt={[16, 20, 24, 30]}>
         <Box mt={[4, 10, 24, 30]}>
           <Stack spacing='4' direction={['column', 'column', 'row']} backgroundColor={'white'}>
-            {/* <Stack > */}
             <Box h='100%'>
               <Image src={recipe.image} alt={recipe.title} objectFit='cover' w='100%'/>
             </Box>

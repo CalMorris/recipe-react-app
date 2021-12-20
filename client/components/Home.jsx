@@ -5,7 +5,6 @@ import RecipeCard from './RecipeCard'
 import { useAuth0 } from '@auth0/auth0-react'
 import { setRecipesState } from '../actions/recipes'
 import { useSelector, useDispatch } from 'react-redux'
-
 import { Box, Container, Flex, SimpleGrid, Image } from '@chakra-ui/react'
 
 const Home = () => {
