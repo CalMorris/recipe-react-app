@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import RecipeCard from './RecipeCard'
+import { Box, SimpleGrid } from '@chakra-ui/react'
 
 export default function UserRecipes () {
   const recipes = useSelector(state => state.recipes)
@@ -15,9 +16,11 @@ export default function UserRecipes () {
 
   return (
     <>
-      <div className='grid grid-cols-3 gap-10 mt-20 px-40'>
-        {recipeList}
-      </div>
+      <Box mt={[16, 20, 24, 30]} centerContent>
+        <SimpleGrid maxW='1300px' minChildWidth='250px' gap={8} centerContent justifyContent='center'>
+          {recipeList}
+        </SimpleGrid>
+      </Box>
 
     </>
   )
