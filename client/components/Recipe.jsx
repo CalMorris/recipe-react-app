@@ -111,7 +111,7 @@ export function Recipe (props) {
             <Box h='100%'>
               <Image src={recipe.image} alt={recipe.title} objectFit='cover' w='100%'/>
             </Box>
-            <Box w='50%' px={[4, 6]} py={[2, 3, 4]} >
+            <Box px={[4, 6]} py={[2, 3, 4]} >
               <Box>
                 <Box>
                   <Heading as='h2' size='lg' color='green.600'>{recipe.title}</Heading>
