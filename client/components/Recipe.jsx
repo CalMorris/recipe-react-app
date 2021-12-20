@@ -106,7 +106,7 @@ export function Recipe (props) {
       { !loading &&
       // <Box mt={[16, 20, 24, 30]}>
         <Box mt={[4, 10, 24, 30]}>
-          <Stack spacing='4' direction={['column', 'column', 'row']}>
+          <Stack spacing='4' direction={['column', 'column', 'row']} backgroundColor={'white'}>
             {/* <Stack > */}
             <Box h='100%'>
               <Image src={recipe.image} alt={recipe.title} objectFit='cover' w='100%'/>
