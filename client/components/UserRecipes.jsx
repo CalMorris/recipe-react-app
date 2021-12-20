@@ -16,7 +16,7 @@ export default function UserRecipes () {
 
   return (
     <>
-      <Box mt={[16, 20, 24, 30]} centerContent>
+      <Box mt={[16, 20, 24, 30]} centerContent px={[2, 4, 6, 20, 30]}>
         <SimpleGrid maxW='1300px' minChildWidth='250px' gap={8} centerContent justifyContent='center'>
           {recipeList}
         </SimpleGrid>
