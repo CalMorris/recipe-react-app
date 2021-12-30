@@ -6,7 +6,7 @@ import { IfAuthenticated } from './Authenticated'
 import { useAuth0 } from '@auth0/auth0-react'
 import { addRecipeState, removeRecipeState } from '../actions/recipes'
 import { addRecipeClient, removeRecipeClient } from '../actions/client'
-import { Stack, Box, Container, SimpleGrid, Text, Heading, Image, Link, UnorderedList, ListItem } from '@chakra-ui/react'
+import { Stack, Box, Container, SimpleGrid, Text, Heading, Image, Link, UnorderedList, ListItem, Button } from '@chakra-ui/react'
 
 export function convertMinsToDisplayTime (minutes) {
   const hours = Math.floor(parseInt(minutes) / 60)
@@ -135,14 +135,14 @@ export function Recipe (props) {
                 {healthLabels}
               </Box>
               <IfAuthenticated>
-                {userRecipeSaved ? <button onClick={() => {
+                {userRecipeSaved ? <Button onClick={() => {
                   dispatch(removeRecipeState(recipeId, token))
                   dispatch(removeRecipeClient(recipeId))
-                }} backgroundColor='red.600' color='white' borderRadius='15px' align='center'>Remove</button>
-                  : <button onClick={() => {
+                }} backgroundColor='red.600' color='white' borderRadius='15px' align='center'>Remove</Button>
+                  : <Button onClick={() => {
                     dispatch(addRecipeState(recipeId, recipe.title, recipe.image, token))
                     dispatch(addRecipeClient({ recipeId, title: recipe.title, image: recipe.image }))
-                  }} backgroundColor='green.600' color='white' borderRadius='15px' align='center'>Save</button>}
+                  }} backgroundColor='green.600' color='white' borderRadius='15px' align='center'>Save</Button>}
               </IfAuthenticated>
             </Box>
           </Stack>
